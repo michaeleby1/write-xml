@@ -1,4 +1,5 @@
 import pandas as pd
+import re
 
 
 #############################
@@ -12,7 +13,15 @@ def to_xml(row):
     """
     xml = ['<item>']
     for col in row.index:
-        xml.append(f'  <field name="{col}">{row[col]}</field>')
+        entry = f'  <field name="{col}">{row[col]}</field>'
+        
+        # replaces ampersands with xml-friendly ampersands
+        entry = re.compile('&').sub('&amp;', entry)
+
+        # removes other special characters
+        special_chars = ['[', ']', 's ', ' ', 't ', 'n ', '']
+        entry = re.compile('|'.join(special_chars)).sub(' ', entry)
+        xml.append(entry)
     xml.append('</item>')
     return '\n'.join(xml)
 
