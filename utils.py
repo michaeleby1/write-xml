@@ -29,7 +29,9 @@ def write_xml(doc, filename, mode='w'):
     Writes XML file
     """
     with open(filename, mode) as f:
+        f.write('<root>\n')
         f.write(doc)
+        f.write('\n</root>')
 
 
 def main(df, filename, mode='w'):
