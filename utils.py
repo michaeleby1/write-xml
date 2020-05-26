@@ -18,9 +18,6 @@ def to_xml(row):
         # replaces ampersands with xml-friendly ampersands
         entry = re.compile('&').sub('&amp;', entry)
 
-        # removes other special characters
-        special_chars = ['[', ']', 's ', ' ', 't ', 'n ', '']
-        entry = re.compile('|'.join(special_chars)).sub(' ', entry)
         xml.append(entry)
     xml.append('</item>')
     return '\n'.join(xml)
